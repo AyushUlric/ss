@@ -1,0 +1,185 @@
+#:import SlideTansition kivy.uix.screenmanager.SlideTransition
+
+<MyCard@MDCard>:
+	text: ""
+	size_hint_y: None
+	padding: 1
+    size_hint: 1, None
+	MDLabel:
+		text: root.text
+
+	MDFillRoundFlatButton:
+		id: button
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Choose"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.file_manager_open(int(root.text[-2:]))
+
+<MyCardR@MDCard>:
+	text: ""
+	size_hint_y: None
+	padding: 1
+    size_hint: 1, None
+	MDLabel:
+		text: root.text
+
+	MDFillRoundFlatButton:
+		id: button
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Delete"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.remove(int(root.text[-2:]))
+
+<RemoveAll@MDCard>:
+	md_bg_color: 1,1,1,0.5
+	size_hint_y: None
+	size_hint: 1, None
+	Widget:
+		width: root.width/2 - b.width
+    MDFillRoundFlatButton:
+    	id:b
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Delete all"
+		halign: "center"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.remove_all()
+	Widget:
+		width: root.width/2 - b.width
+
+ScreenManager:
+	FirstScreen:
+		name: "first_screen"
+		id: first_screen
+	UploadScreen:
+		name: "upload_screen"
+		id: upload_screen
+	RemoveScreen:
+		name: "remove_screen"
+		id: remove_screen
+
+<FirstScreen>
+	MDBoxLayout:
+		orientation: 'vertical'
+		Widget:
+			height: 50
+		MDFillRoundFlatButton:
+			text: "Upload Files"
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			on_release: setattr(root.manager, "current", "upload_screen")
+		Widget:
+			height: 1
+		MDFillRoundFlatButton:
+			text: "Remove Files"
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			on_release: setattr(root.manager, "current", "remove_screen")
+		Widget:
+			height: 50
+
+<UploadScreen>
+	ScrollView:
+		MDList:
+			spacing: 5
+			MyCard:
+				id: 1
+				text: "Page 1"
+			MyCard:
+				id: 2
+				text: "Page 2"
+			MyCard:
+				id: 3
+				text: "Page 3"
+			MyCard:
+				id: 4
+				text: "Page 4"
+			MyCard:
+				id: 5
+				text: "Page 5"
+			MyCard:
+				id: 6
+				text: "Page 6"
+			MyCard:
+				id: 7
+				text: "Page 7"
+			MyCard:
+				id: 8
+				text: "Page 8"
+			MyCard:
+				id: 9
+				text: "Page 9"
+			MyCard:
+				id: 10
+				text: "Page 10"
+			MyCard:
+				id: 11
+				text: "Page 11"
+			MyCard:
+				id: 12
+				text: "Page 12"
+			MyCard:
+				id: 13
+				text: "Page 13"
+			MyCard:
+				id: 14
+				text: "Page 14"
+			MyCard:
+				id: 15
+				text: "Page 15"
+			MDFillRoundFlatButton:
+				text: "Done"
+				md_bg_color: 0,0,1,1
+				on_release: root.update()
+
+<RemoveScreen>
+	ScrollView:
+		MDList:
+			spacing: 5
+
+			RemoveAll:
+			MyCardR:
+				id: 1
+				text: "Page 1"
+			MyCardR:
+				id: 2
+				text: "Page 2"
+			MyCardR:
+				id: 3
+				text: "Page 3"
+			MyCardR:
+				id: 4
+				text: "Page 4"
+			MyCardR:
+				id: 5
+				text: "Page 5"
+			MyCardR:
+				id: 6
+				text: "Page 6"
+			MyCardR:
+				id: 7
+				text: "Page 7"
+			MyCardR:
+				id: 8
+				text: "Page 8"
+			MyCardR:
+				id: 9
+				text: "Page 9"
+			MyCardR:
+				id: 10
+				text: "Page 10"
+			MyCardR:
+				id: 11
+				text: "Page 11"
+			MyCardR:
+				id: 12
+				text: "Page 12"
+			MyCardR:
+				id: 13
+				text: "Page 13"
+			MyCardR:
+				id: 14
+				text: "Page 14"
+			MyCardR:
+				id: 15
+				text: "Page 15"
