@@ -1,0 +1,234 @@
+#:import SlideTansition kivy.uix.screenmanager.SlideTransition
+
+<MyCard@MDCard>:
+	text: ""
+	size_hint_y: None
+	padding: 1
+    size_hint: 1, None
+	MDLabel:
+		text: root.text
+
+	MDFillRoundFlatButton:
+		id: button
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Choose"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.file_manager_open(int(root.text[-2:]))
+
+<MyCardR@MDCard>:
+	text: ""
+	size_hint_y: None
+	padding: 1
+    size_hint: 1, None
+	MDLabel:
+		text: root.text
+
+	MDFillRoundFlatButton:
+		id: button
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Delete"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.remove(int(root.text[-2:]))
+
+<RemoveAll@MDCard>:
+	md_bg_color: 1,1,1,0.5
+	size_hint_y: None
+	size_hint: 1, None
+	Widget:
+		width: root.width/2 - b.width
+    MDFillRoundFlatButton:
+    	id:b
+		theme_text_color: "Custom"
+		md_bg_color: 0,0,1,1
+		text: "Delete all"
+		halign: "center"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		on_release: app.remove_all()
+	Widget:
+		width: root.width/2 - b.width
+
+ScreenManager:
+	FirstScreen:
+		name: "first_screen"
+		id: first_screen
+	UploadScreen:
+		name: "upload_screen"
+		id: upload_screen
+	RemoveScreen:
+		name: "remove_screen"
+		id: remove_screen
+	ChangePin:
+		name: "change_pin"
+		id: change_pin
+
+<FirstScreen>:
+	MDBoxLayout:
+		orientation: 'vertical'
+		MDToolbar:
+			title: "Configure Viewer"
+		MDLabel:
+			halign: "center"
+			text: "[u][i]Options[/u][/i]"
+			markup: True
+			font_style: "H5"
+		MDFillRoundFlatButton:
+			text: "Upload Files"
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			on_release: setattr(root.manager, "current", "upload_screen")
+		Widget:
+			height: 1
+		MDFillRoundFlatButton:
+			text: "Change PIN"
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			on_release: setattr(root.manager, "current", "change_pin")
+		Widget:
+			height: 1
+		MDFillRoundFlatButton:
+			text: "Remove Files"
+			pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+			on_release: setattr(root.manager, "current", "remove_screen")
+		Widget:
+			height: 50
+
+<UploadScreen>:
+	BoxLayout:
+		orientation: 'vertical'
+		elevation: 10
+		MDToolbar:
+			title: "Upload Images"
+			left_action_items: [['arrow-left', lambda x: setattr(root.manager, "current", "first_screen")]]
+		ScrollView:
+			MDList:
+				spacing: 15
+				MyCard:
+					text: "Page 1"
+				MyCard:
+					text: "Page 2"
+				MyCard:
+					text: "Page 3"
+				MyCard:
+					text: "Page 4"
+				MyCard:
+					text: "Page 5"
+				MyCard:
+					text: "Page 6"
+				MyCard:
+					text: "Page 7"
+				MyCard:
+					text: "Page 8"
+				MyCard:
+					text: "Page 9"
+				MyCard:
+					text: "Page 10"
+				MyCard:
+					text: "Page 11"
+				MyCard:
+					text: "Page 12"
+				MyCard:
+					text: "Page 13"
+				MyCard:
+					text: "Page 14"
+				MyCard:
+					text: "Page 15"
+				MDFillRoundFlatButton:
+					text: "Done"
+					on_release: root.update()
+
+<RemoveScreen>:
+	BoxLayout:
+		orientation: 'vertical'
+		elevation: 10
+		MDToolbar:
+			title: "Remove Images"
+			left_action_items: [['arrow-left', lambda x: setattr(root.manager, "current", "first_screen")]]
+		ScrollView:
+			MDList:
+				spacing: 15
+				RemoveAll:
+				MyCardR:
+					id: 1
+					text: "Page 1"
+				MyCardR:
+					id: 2
+					text: "Page 2"
+				MyCardR:
+					id: 3
+					text: "Page 3"
+				MyCardR:
+					id: 4
+					text: "Page 4"
+				MyCardR:
+					id: 5
+					text: "Page 5"
+				MyCardR:
+					id: 6
+					text: "Page 6"
+				MyCardR:
+					id: 7
+					text: "Page 7"
+				MyCardR:
+					id: 8
+					text: "Page 8"
+				MyCardR:
+					id: 9
+					text: "Page 9"
+				MyCardR:
+					id: 10
+					text: "Page 10"
+				MyCardR:
+					id: 11
+					text: "Page 11"
+				MyCardR:
+					id: 12
+					text: "Page 12"
+				MyCardR:
+					id: 13
+					text: "Page 13"
+				MyCardR:
+					id: 14
+					text: "Page 14"
+				MyCardR:
+					id: 15
+					text: "Page 15"
+<ChangePin>:
+	BoxLayout:
+		orientation: 'vertical'
+		MDToolbar:
+			title: "Change Pin"
+			left_action_items: [['arrow-left', lambda x: setattr(root.manager, "current", "first_screen")]]
+		BoxLayout:
+			orientation: 'vertical'
+			padding: 25
+			spacing: 25
+			MDTextField:
+				id: cnfrm_previous_pin
+				mode: "rectangle"
+				hint_text: "Confirm Previous Pin"
+				input_filter: "int"
+				password: True
+			MDTextField:
+				id: new_pin
+				mode: "rectangle"
+				hint_text: "Enter New Pin"
+				input_filter: "int"
+				password: True
+			MDTextField:
+				id: cnfrm_new_pin
+				mode: "rectangle"
+				hint_text: "Confirm New Pin"
+				helper_text: ""
+				on_text: self.helper_text = "Pins Do Not Match!" if self.text!=new_pin.text else ""
+				on_text: btn.disabled = self.text!=new_pin.text and cnfrm_previous_pin.text!=0
+				helper_text_mode: "persistent"
+				input_filter: "int"
+				password: True
+			MDFillRoundFlatButton:
+				id: btn
+				text: "Done"
+				disabled: True
+				on_release: root.changePin(int(cnfrm_previous_pin.text), int(new_pin.text), int(cnfrm_new_pin.text))
+				pos_hint: {'center_x': 0.8}
+			Widget:
+				height:1
