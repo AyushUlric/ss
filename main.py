@@ -19,10 +19,6 @@ else:
 import pyrebase
 
 config = {
-  "apiKey": "AIzaSyDrk0fs498an6ECXJvDYql7JMAnNqT6QNs",
-  "authDomain": "kali-project-d40fc.firebaseapp.com",
-  "databaseURL": "https://kali-project-d40fc-default-rtdb.firebaseio.com",
-  "storageBucket": "kali-project-d40fc.appspot.com"
 }
 
 firebase = pyrebase.initialize_app(config)
